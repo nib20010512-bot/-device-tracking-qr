@@ -103,6 +103,11 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
+// ─── HOMEPAGE ROUTE ───────────────────────────────────────────────────────────
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 const requireAuth = (req, res, next) =>
   req.session.userId ? next() : res.status(401).json({ error: 'Unauthorized' });
 
